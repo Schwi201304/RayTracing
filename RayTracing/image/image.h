@@ -5,6 +5,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include"../vec3.h"
 
 namespace schwi {
 	typedef unsigned char BYTE;
@@ -26,6 +27,10 @@ namespace schwi {
 		const BYTE& operator[](const int i)const { return rgba[i]; }
 		Color operator*(const double d);
 	};
+
+	inline Color c2Color(color c) {
+		return Color(c[0]*255, c[1]*255, c[2]*255);
+	}
 
 	class Image {
 	private:

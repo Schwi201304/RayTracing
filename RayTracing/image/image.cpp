@@ -7,6 +7,7 @@
 #include<stb_image/stb_image_resize.h>
 
 namespace schwi {
+
 	Color Color::operator*(const double d) {
 		Color ret=*this;
 		for (int i = 0; i < comp; i++) {
