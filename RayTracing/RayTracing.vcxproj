@@ -141,8 +141,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="hittable.h" />
     <ClCompile Include="image\image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="sphere.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="image\image.h" />

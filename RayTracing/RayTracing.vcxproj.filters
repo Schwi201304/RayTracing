@@ -21,6 +21,12 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hittable.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sphere.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="image\image.h">
