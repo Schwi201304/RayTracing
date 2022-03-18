@@ -142,12 +142,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="hittable.h" />
-    <ClCompile Include="image\image.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="raytracing.h" />
     <ClCompile Include="sphere.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="image\image.h" />
+    <ClInclude Include="hittable_list.h" />
+    <ClInclude Include="image.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>

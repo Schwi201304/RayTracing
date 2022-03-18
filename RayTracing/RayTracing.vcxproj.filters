@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="image\image.cpp">
+    <ClCompile Include="image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -27,15 +27,21 @@
     <ClCompile Include="sphere.h">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="raytracing.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="image\image.h">
+    <ClInclude Include="image.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ray.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vec3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hittable_list.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
