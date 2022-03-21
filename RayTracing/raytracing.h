@@ -5,11 +5,10 @@
 #include <limits>
 #include <memory>
 #include "image.h"
-
+#include <cstdlib>
 // Common Headers
 
 #include "ray.h"
-#include "vec3.h"
 
 // Usings
 
@@ -27,12 +26,23 @@ const double pi = 3.1415926535897932385;
 // Utility Functions
 
 inline double degrees_to_radians(double degrees) {
-    return degrees * pi / 180.0;
+	return degrees * pi / 180.0;
 }
 
 inline Color c2Color(color c) {
-	return Color(c[0] * 255, c[1] * 255, c[2] * 255);
+	return Color(c[0] * 256, c[1] * 256, c[2] * 256);
 }
 
+inline double clamp(double x, double min, double max) {
+	if (x < min) return min;
+	if (x > max) return max;
+	return x;
+}
 
+inline Color color_Correct(color c) {
+	c[0] = clamp(sqrt(c[0]), 0, 0.999);
+	c[1] = clamp(sqrt(c[1]), 0, 0.999);
+	c[2] = clamp(sqrt(c[2]), 0, 0.999);
+	return c2Color(c);
+}
 #endif
