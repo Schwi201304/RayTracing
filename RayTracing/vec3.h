@@ -82,65 +82,21 @@ inline vec3 operator*(const vec3& v, double t) {
     return t * v;
 }
 
-inline vec3 operator/(vec3 v, double t) {
+inline vec3 operator/(const vec3& v, double t) {
     return (1 / t) * v;
 }
 
-inline double dot(const vec3& u, const vec3& v) {
-    return u.e[0] * v.e[0]
-        + u.e[1] * v.e[1]
-        + u.e[2] * v.e[2];
-}
-
-inline vec3 cross(const vec3& u, const vec3& v) {
-    return vec3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
-        u.e[2] * v.e[0] - u.e[0] * v.e[2],
-        u.e[0] * v.e[1] - u.e[1] * v.e[0]);
-}
-
-inline vec3 unit_vector(vec3 v) {
-    return v / v.length();
-}
-
-inline double random_double() {
-    // Returns a random real in [0,1).
-    return rand() / (RAND_MAX + 1.0);
-}
-
-inline double random_double(double min, double max) {
-    // Returns a random real in [min,max).
-    return min + (max - min) * random_double();
-}
-
-inline vec3 random() {
-    return vec3(random_double(), random_double(), random_double());
-}
-
-inline vec3 random(double min, double max) {
-    return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
-}
-
-inline vec3 random_in_unit_sphere() {
-    while (true) {
-        auto p = random(-1, 1);
-        if (p.length_squared() >= 1) continue;
-        return p;
-    }
-}
-
-inline vec3 random_unit_vector() {
-    return unit_vector(random_in_unit_sphere());
-}
-
-inline vec3 random_in_hemisphere(const vec3& normal) {
-    vec3 in_unit_sphere = random_in_unit_sphere();
-    if (dot(in_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
-        return in_unit_sphere;
-    else
-        return -in_unit_sphere;
-}
-
-inline vec3 reflect(const vec3& v, const vec3& n) {
-    return v - 2 * dot(v, n) * n;
-}
+double dot(const vec3& u, const vec3& v);
+vec3 cross(const vec3& u, const vec3& v);
+vec3 unit_vector(vec3 v);
+double random_double();
+double random_double(double min, double max);
+vec3 random();
+vec3 random(double min, double max);
+vec3 random_in_unit_sphere();
+vec3 random_unit_vector();
+vec3 random_in_hemisphere(const vec3& normal);
+vec3 reflect(const vec3& v, const vec3& n);
+vec3 refract(const vec3& uv, const vec3& n, double etai_over_etat);
+vec3 random_in_unit_disk();
 #endif

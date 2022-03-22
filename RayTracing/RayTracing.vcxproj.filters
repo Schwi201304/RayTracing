@@ -30,6 +30,9 @@
     <ClCompile Include="raytracing.h">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="vec3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="image.h">
@@ -50,5 +53,10 @@
     <ClInclude Include="material.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="out.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>
