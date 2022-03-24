@@ -45,4 +45,9 @@ inline Color color_Correct(color c) {
 	c[2] = clamp(sqrt(c[2]), 0, 0.999);
 	return c2Color(c);
 }
+
+inline int random_int(int min, int max) {
+	// Returns a random integer in [min,max].
+	return static_cast<int>(random_double(min, max + 1));
+}
 #endif
