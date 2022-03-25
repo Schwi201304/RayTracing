@@ -17,7 +17,7 @@ using std::make_shared;
 using std::sqrt;
 using schwi::Color;
 using schwi::Image;
-
+using BYTE = unsigned char;
 // Constants
 
 const double infinity = std::numeric_limits<double>::infinity();
@@ -30,7 +30,11 @@ inline double degrees_to_radians(double degrees) {
 }
 
 inline Color c2Color(color c) {
-	return Color(c[0] * 256.0, c[1] * 256.0, c[2] * 256.0);
+	return Color((BYTE)(c[0] * 256), (BYTE)(c[1] * 256), (BYTE)(c[2] * 256));
+}
+
+inline color C2color(Color c) {
+	return color(c[0] / 256.0, c[1] / 256.0, c[2] / 256.0);
 }
 
 inline double clamp(double x, double min, double max) {

@@ -24,19 +24,16 @@
     <ClCompile Include="hittable.h">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sphere.h">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="raytracing.h">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vec3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sphere.cpp">
+    <ClCompile Include="perlin.h">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="perlin.h">
+    <ClCompile Include="sphere.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,6 +66,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="aarect.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

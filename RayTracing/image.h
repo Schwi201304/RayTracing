@@ -46,11 +46,13 @@ namespace schwi {
 		inline const int width()const { return w; }
 		inline const int height()const { return h; }
 		inline const int channels() const { return comp; }
+		inline const bool empty()const { return pixels.empty(); }
 
 		bool load_file(const std::string& filename, bool flip = false);
 		void write_file(const std::string& filename, bool flip = false)const;
 		void setColor(const int x, const int y,const Color& color);
 		Color getColor(const int x, const int y) const;
+		Color getColor(const double u, const double v)const;
 	};
 }
 #endif

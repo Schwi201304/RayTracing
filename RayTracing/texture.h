@@ -61,4 +61,31 @@ public:
 	perlin noise;
 	double scale;
 };
+
+class image_texture : public texture {
+public:
+    const static int bytes_per_pixel = 3;
+    Image img;
+
+    image_texture(){}
+
+    image_texture(const char* filename) {
+        auto components_per_pixel = bytes_per_pixel;
+
+        if (!img.load_file(filename)) {
+            std::cerr << "Texture image load fail" << std::endl;
+        }
+    }
+
+    virtual color value(double u, double v, const vec3& p) const override {
+        // If we have no texture data, then return solid cyan as a debugging aid.
+        if (img.empty())
+            return color(0, 1, 1);
+
+        // Clamp input texture coordinates to [0,1] x [1,0]
+        u = clamp(u, 0.0, 1.0);
+        v = 1.0 - clamp(v, 0.0, 1.0);  // Flip V to image coordinates
+        return C2color(img.getColor(u,v));
+    }
+};
 #endif
