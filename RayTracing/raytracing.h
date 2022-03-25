@@ -30,7 +30,7 @@ inline double degrees_to_radians(double degrees) {
 }
 
 inline Color c2Color(color c) {
-	return Color(c[0] * 256, c[1] * 256, c[2] * 256);
+	return Color((schwi::BYTE)c[0] * 256, (schwi::BYTE)c[1] * 256, (schwi::BYTE)c[2] * 256);
 }
 
 inline double clamp(double x, double min, double max) {

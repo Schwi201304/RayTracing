@@ -148,6 +148,7 @@
     <ClCompile Include="hittable.h" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="perlin.h" />
     <ClCompile Include="raytracing.h" />
     <ClCompile Include="sphere.cpp" />
     <ClCompile Include="sphere.h" />
