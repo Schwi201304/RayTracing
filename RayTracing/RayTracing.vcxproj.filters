@@ -74,6 +74,12 @@
     <ClInclude Include="aarect.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="box.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="constant_medium.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="out.png">
