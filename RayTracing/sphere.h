@@ -17,6 +17,8 @@ public:
 		const ray& r, double t_min, double t_max, hit_record& rec) const override;
 	virtual bool bounding_box(
 		double time0, double time1, aabb& output_box) const override;
+	virtual double pdf_value(const point3& o, const vec3& v) const override;
+	virtual vec3 random(const point3& o) const override;
 private:
 	static void get_sphere_uv(const point3& p, double& u, double& v) {
 		// p: a given point on the sphere of radius one, centered at the origin.
@@ -27,10 +29,10 @@ private:
 		//     <0 0 1> yields <0.25 0.50>       < 0  0 -1> yields <0.75 0.50>
 
 		auto theta = acos(-p.y());
-		auto phi = atan2(-p.z(), p.x()) + pi;
+		auto phi = atan2(-p.z(), p.x()) + PI;
 
-		u = phi / (2 * pi);
-		v = theta / pi;
+		u = phi / (2 * PI);
+		v = theta / PI;
 	}
 };
 

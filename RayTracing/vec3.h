@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-using std::sqrt;
+#define PI acos(-1)
 
 class vec3 {
 public:
@@ -38,7 +38,7 @@ public:
     }
 
     double length() const {
-        return sqrt(length_squared());
+        return std::sqrt(length_squared());
     }
 
     double length_squared() const {
@@ -99,4 +99,6 @@ vec3 random_in_hemisphere(const vec3& normal);
 vec3 reflect(const vec3& v, const vec3& n);
 vec3 refract(const vec3& uv, const vec3& n, double etai_over_etat);
 vec3 random_in_unit_disk();
+vec3 random_cosine_direction();
+
 #endif
