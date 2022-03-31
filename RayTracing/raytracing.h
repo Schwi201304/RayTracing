@@ -42,10 +42,16 @@ inline double clamp(double x, double min, double max) {
 	return x;
 }
 
-inline Color color_Correct(color c) {
-	c[0] = clamp(sqrt(c[0]), 0, 0.999);
-	c[1] = clamp(sqrt(c[1]), 0, 0.999);
-	c[2] = clamp(sqrt(c[2]), 0, 0.999);
+inline Color color_Correct(color c,int samples_per_pixel) {
+	// Replace NaN components with zero. See explanation in Ray Tracing: The Rest of Your Life.
+	if (c[0] != c[0]) c[0] = 0.0;
+	if (c[1] != c[1]) c[1] = 0.0;
+	if (c[2] != c[2]) c[2] = 0.0;
+
+	// Divide the color by the number of samples and gamma-correct for gamma=2.0.
+	c[0] = clamp(sqrt(c[0]/samples_per_pixel), 0, 0.999);
+	c[1] = clamp(sqrt(c[1]/samples_per_pixel), 0, 0.999);
+	c[2] = clamp(sqrt(c[2]/samples_per_pixel), 0, 0.999);
 	return c2Color(c);
 }
 

@@ -149,7 +149,7 @@ int main() {
 				ray r = cam.get_ray(u, v);
 				pixel_color += ray_color(r, background, world, lights, max_depth);
 			}
-			img.setColor(i, j, color_Correct(pixel_color / samples_per_pixel));
+			img.setColor(i, j, color_Correct(pixel_color , samples_per_pixel));
 		}
 	}
 	img.write_file("out.png", true);
