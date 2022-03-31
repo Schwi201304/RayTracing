@@ -124,9 +124,9 @@ int main() {
 		break;
 	}
 
-	shared_ptr<hittable_list> lights;
-	lights->add(make_shared<xz_rect>(213, 343, 227, 332, 554, 0));
-	lights->add(make_shared<sphere>(point3(190, 90, 190), 90, 0));
+	shared_ptr<hittable_list> lights=make_shared<hittable_list>();
+	lights->add(make_shared<xz_rect>(213, 343, 227, 332, 554, make_shared<diffuse_light>(color(15, 15, 15))));
+	lights->add(make_shared<sphere>(point3(190, 90, 190), 90, make_shared<dielectric>(1.5)));
 	// Camera
 
 	vec3 vup(0, 1, 0);
