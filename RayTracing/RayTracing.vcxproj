@@ -153,7 +153,7 @@
     <ClCompile Include="perlin.h" />
     <ClCompile Include="raytracing.h" />
     <ClCompile Include="sphere.cpp" />
-    <ClCompile Include="vec3.cpp" />
+    <ClCompile Include="Srandom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aabb.h" />
@@ -165,12 +165,14 @@
     <ClInclude Include="hittable_list.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="material.h" />
+    <ClInclude Include="Smath.h" />
     <ClInclude Include="moving_sphere.h" />
     <ClInclude Include="onb.h" />
     <ClInclude Include="pdf.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sphere.h" />
+    <ClInclude Include="Srandom.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>

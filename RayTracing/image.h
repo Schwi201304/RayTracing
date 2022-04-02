@@ -7,7 +7,7 @@
 #include<vector>
 
 namespace schwi {
-	typedef unsigned char BYTE;
+	using BYTE = unsigned char;
 
 	class Color {
 	public:
@@ -17,7 +17,7 @@ namespace schwi {
 		Color() :rgba{ 0,0,0,0 }, comp(3){};//default
 		Color(BYTE r) :rgba{ r,255,255,255 }, comp(1){}//Grayscale
 		Color(BYTE r, BYTE g, BYTE b) :rgba{ r,g,b,255 }, comp(3) {}//rgb
-		Color(BYTE r, BYTE g, BYTE b,BYTE a) :rgba{ r,g,b,a }, comp(4) {}//rgba
+		Color(BYTE r, BYTE g, BYTE b, BYTE a) :rgba{ r,g,b,a }, comp(4) {}//rgba
 		Color(const BYTE* color, int _comp) :comp(_comp) {
 			for (int i = _comp; i--; rgba[i] = color[i]);
 		}
@@ -50,7 +50,7 @@ namespace schwi {
 
 		bool load_file(const std::string& filename, bool flip = false);
 		void write_file(const std::string& filename, bool flip = false)const;
-		void setColor(const int x, const int y,const Color& color);
+		void setColor(const int x, const int y, const Color& color);
 		Color getColor(const int x, const int y) const;
 		Color getColor(const double u, const double v)const;
 	};

@@ -2,40 +2,43 @@
 #include "pdf.h"
 #include <iostream>
 
-color ray_color(
-	const ray& r, const color& background, const hittable& world,
-	shared_ptr<hittable> lights, int depth
-) {
-	hit_record rec;
-	// If we've exceeded the ray bounce limit, no more light is gathered.
-	if (depth <= 0)
-		return color(0, 0, 0);
+namespace schwi {
+	color ray_color(
+		const ray& r, const color& background, const hittable& world,
+		shared_ptr<hittable> lights, int depth
+	) {
+		hit_record rec;
+		// If we've exceeded the ray bounce limit, no more light is gathered.
+		if (depth <= 0)
+			return color(0, 0, 0);
 
-	// If the ray hits nothing, return the background color.
-	if (!world.hit(r, 0.001, infinity, rec))
-		return background;
+		// If the ray hits nothing, return the background color.
+		if (!world.hit(r, 0.001, infinity, rec))
+			return background;
 
-	scatter_record srec;
-	color emitted = rec.mat_ptr->emitted(r, rec, rec.u, rec.v, rec.p);
-	if (!rec.mat_ptr->scatter(r, rec, srec))
-		return emitted;
+		scatter_record srec;
+		color emitted = rec.mat_ptr->emitted(r, rec, rec.u, rec.v, rec.p);
+		if (!rec.mat_ptr->scatter(r, rec, srec))
+			return emitted;
 
-	if (srec.is_specular) {
-		return srec.attenuation
-			* ray_color(srec.specular_ray, background, world, lights, depth - 1);
+		if (srec.is_specular) {
+			return srec.attenuation
+				* ray_color(srec.specular_ray, background, world, lights, depth - 1);
+		}
+
+		auto light_ptr = make_shared<hittable_pdf>(lights, rec.p);
+		mixture_pdf p(light_ptr, srec.pdf_ptr);
+
+		ray scattered = ray(rec.p, p.generate(), r.time());
+		auto pdf_val = p.value(scattered.direction());
+
+		return emitted
+			+ srec.attenuation * rec.mat_ptr->scattering_pdf(r, rec, scattered)
+			* ray_color(scattered, background, world, lights, depth - 1) / pdf_val;
 	}
-
-	auto light_ptr = make_shared<hittable_pdf>(lights, rec.p);
-	mixture_pdf p(light_ptr, srec.pdf_ptr);
-
-	ray scattered = ray(rec.p, p.generate(), r.time());
-	auto pdf_val = p.value(scattered.direction());
-
-	return emitted
-		+ srec.attenuation * rec.mat_ptr->scattering_pdf(r, rec, scattered)
-		* ray_color(scattered, background, world, lights, depth - 1) / pdf_val;
 }
 
+using namespace schwi;
 int main() {
 
 	// Image
@@ -55,7 +58,7 @@ int main() {
 	auto vfov = 40.0;
 	auto aperture = 0.0;
 
-	switch (6) {
+	switch (1) {
 	case 1:
 		world = random_scene();
 		background = color(0.70, 0.80, 1.00);
@@ -129,7 +132,7 @@ int main() {
 	lights->add(make_shared<sphere>(point3(190, 90, 190), 90, make_shared<dielectric>(1.5)));
 	// Camera
 
-	vec3 vup(0, 1, 0);
+	Vector3d vup(0, 1, 0);
 	auto dist_to_focus = 10.0;
 	int image_height = static_cast<int>(image_width / aspect_ratio);
 
