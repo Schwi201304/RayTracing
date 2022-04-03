@@ -21,7 +21,7 @@ namespace schwi {
 			size_t start, size_t end, double time0, double time1);
 
 		virtual bool hit(
-			const ray& r, double t_min, double t_max, hit_record& rec) const override;
+			const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 
 		virtual bool bounding_box(double time0, double time1, aabb& output_box) const override;
 
@@ -46,7 +46,7 @@ namespace schwi {
 		return true;
 	}
 
-	bool bvh_node::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
+	bool bvh_node::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
 		if (!box.hit(r, t_min, t_max))
 			return false;
 

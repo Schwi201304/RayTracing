@@ -1,7 +1,7 @@
 #ifndef SCHWI_RANDOM_H
 #define SCHWI_RANDOM_H
 
-#include "vec3.h"
+#include "vector3.h"
 namespace schwi {
 	double random_double();
 	double random_double(double min, double max);

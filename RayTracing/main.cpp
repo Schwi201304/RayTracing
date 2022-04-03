@@ -4,7 +4,7 @@
 
 namespace schwi {
 	color ray_color(
-		const ray& r, const color& background, const hittable& world,
+		const Ray& r, const color& background, const hittable& world,
 		shared_ptr<hittable> lights, int depth
 	) {
 		hit_record rec;
@@ -13,7 +13,7 @@ namespace schwi {
 			return color(0, 0, 0);
 
 		// If the ray hits nothing, return the background color.
-		if (!world.hit(r, 0.001, infinity, rec))
+		if (!world.hit(r, 0.001, Infinity, rec))
 			return background;
 
 		scatter_record srec;
@@ -29,7 +29,7 @@ namespace schwi {
 		auto light_ptr = make_shared<hittable_pdf>(lights, rec.p);
 		mixture_pdf p(light_ptr, srec.pdf_ptr);
 
-		ray scattered = ray(rec.p, p.generate(), r.time());
+		Ray scattered = Ray(rec.p, p.generate(), r.time());
 		auto pdf_val = p.value(scattered.direction());
 
 		return emitted
@@ -53,8 +53,8 @@ int main() {
 
 	hittable_list world;
 
-	point3 lookfrom;
-	point3 lookat;
+	Point3d lookfrom;
+	Point3d lookat;
 	auto vfov = 40.0;
 	auto aperture = 0.0;
 
@@ -62,37 +62,37 @@ int main() {
 	case 1:
 		world = random_scene();
 		background = color(0.70, 0.80, 1.00);
-		lookfrom = point3(13, 2, 3);
-		lookat = point3(0, 0, 0);
+		lookfrom = Point3d(13, 2, 3);
+		lookat = Point3d(0, 0, 0);
 		vfov = 20.0;
 		aperture = 0.1;
 		break;
 	case 2:
 		world = two_spheres();
 		background = color(0.70, 0.80, 1.00);
-		lookfrom = point3(13, 2, 3);
-		lookat = point3(0, 0, 0);
+		lookfrom = Point3d(13, 2, 3);
+		lookat = Point3d(0, 0, 0);
 		vfov = 20.0;
 		break;
 	case 3:
 		world = two_perlin_spheres();
 		background = color(0.70, 0.80, 1.00);
-		lookfrom = point3(13, 2, 3);
-		lookat = point3(0, 0, 0);
+		lookfrom = Point3d(13, 2, 3);
+		lookat = Point3d(0, 0, 0);
 		vfov = 20.0;
 		break;
 	case 4:
 		world = earth();
 		background = color(0.70, 0.80, 1.00);
-		lookfrom = point3(13, 2, 3);
-		lookat = point3(0, 0, 0);
+		lookfrom = Point3d(13, 2, 3);
+		lookat = Point3d(0, 0, 0);
 		vfov = 20.0;
 		break;
 	case 5:
 		world = simple_light();
 		background = color(0, 0, 0);
-		lookfrom = point3(26, 3, 6);
-		lookat = point3(0, 2, 0);
+		lookfrom = Point3d(26, 3, 6);
+		lookat = Point3d(0, 2, 0);
 		vfov = 20.0;
 		break;
 	case 6:
@@ -101,8 +101,8 @@ int main() {
 		image_width = 600;
 		samples_per_pixel = 100;
 		background = color(0, 0, 0);
-		lookfrom = point3(278, 278, -800);
-		lookat = point3(278, 278, 0);
+		lookfrom = Point3d(278, 278, -800);
+		lookat = Point3d(278, 278, 0);
 		vfov = 40.0;
 		break;
 	case 7:
@@ -110,8 +110,8 @@ int main() {
 		aspect_ratio = 1.0;
 		image_width = 600;
 		samples_per_pixel = 200;
-		lookfrom = point3(278, 278, -800);
-		lookat = point3(278, 278, 0);
+		lookfrom = Point3d(278, 278, -800);
+		lookat = Point3d(278, 278, 0);
 		vfov = 40.0;
 		break;
 	default:
@@ -121,15 +121,15 @@ int main() {
 		image_width = 800;
 		samples_per_pixel = 1000;
 		background = color(0, 0, 0);
-		lookfrom = point3(478, 278, -600);
-		lookat = point3(278, 278, 0);
+		lookfrom = Point3d(478, 278, -600);
+		lookat = Point3d(278, 278, 0);
 		vfov = 40.0;
 		break;
 	}
 
 	shared_ptr<hittable_list> lights=make_shared<hittable_list>();
 	lights->add(make_shared<xz_rect>(213, 343, 227, 332, 554, make_shared<diffuse_light>(color(15, 15, 15))));
-	lights->add(make_shared<sphere>(point3(190, 90, 190), 90, make_shared<dielectric>(1.5)));
+	lights->add(make_shared<sphere>(Point3d(190, 90, 190), 90, make_shared<dielectric>(1.5)));
 	// Camera
 
 	Vector3d vup(0, 1, 0);
@@ -149,7 +149,7 @@ int main() {
 			for (int s = 0; s < samples_per_pixel; ++s) {
 				auto u = (i + random_double()) / ((double)image_width - 1);
 				auto v = (j + random_double()) / ((double)image_height - 1);
-				ray r = cam.get_ray(u, v);
+				Ray r = cam.get_ray(u, v);
 				pixel_color += ray_color(r, background, world, lights, max_depth);
 			}
 			img.setColor(i, j, color_Correct(pixel_color , samples_per_pixel));

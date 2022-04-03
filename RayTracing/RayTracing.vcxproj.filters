@@ -19,6 +19,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="ray">
+      <UniqueIdentifier>{7f41274b-1a56-41ad-a7a0-085b3204506b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="medium">
+      <UniqueIdentifier>{f3c4f06b-064e-4f52-869c-7adc2267bd92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="image.cpp">
@@ -36,18 +42,18 @@
     <ClCompile Include="sphere.cpp">
       <Filter>shape</Filter>
     </ClCompile>
-    <ClCompile Include="Srandom.cpp">
+    <ClCompile Include="SRandom.cpp">
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="raytracing.h">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="vec.h">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="image.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="ray.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
@@ -86,7 +92,7 @@
     <ClInclude Include="sphere.h">
       <Filter>shape</Filter>
     </ClInclude>
-    <ClInclude Include="vec3.h">
+    <ClInclude Include="vector3.h">
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="constant_medium.h">
@@ -95,10 +101,49 @@
     <ClInclude Include="hittable_list.h">
       <Filter>shape</Filter>
     </ClInclude>
-    <ClInclude Include="Smath.h">
+    <ClInclude Include="schwi.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="Srandom.h">
+    <ClInclude Include="SRandom.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="point3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="normal3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="ray.h">
+      <Filter>ray</Filter>
+    </ClInclude>
+    <ClInclude Include="RayDifferential.h">
+      <Filter>ray</Filter>
+    </ClInclude>
+    <ClInclude Include="medium.h">
+      <Filter>medium</Filter>
+    </ClInclude>
+    <ClInclude Include="bound.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="interaction.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="shape.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="point2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="transform.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="quaternion.h">
       <Filter>math</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,26 +1,30 @@
-#ifndef RAY_H
-#define RAY_H
+#ifndef SCHWI_RAY_H
+#define SCHWI_RAY_H
 
-#include "vec3.h"
+#include "point3.h"
+#include "schwi.h"
+#include "medium.h"
 namespace schwi {
-    class ray {
+    class Ray {
     public:
-        point3 orig;
-        Vector3d dir;
-        double tm;
+        Point3d o;
+        Vector3d d;
+        double tMax;
+        double t;
+        const Medium* medium;
 
     public:
-        ray() {}
-        ray(const point3& origin, const Vector3d& direction, double time = 0.0)
-            : orig(origin), dir(direction), tm(time)
-        {}
+        Ray() : tMax(Infinity), t(0.f), medium(nullptr) { }
+        Ray(const Point3d& o, const Vector3d& d, double tMax = Infinity,
+            double t = 0.f, const Medium* medium = nullptr)
+            : o(o), d(d), tMax(tMax), t(t), medium(medium) { }
 
-        point3 origin() const { return orig; }
-        Vector3d direction() const { return dir; }
-        double time() const { return tm; }
+        Point3d origin() const { return o; }
+        Vector3d direction() const { return d; }
+        double time() const { return t; }
 
-        point3 at(double t) const {
-            return orig + t * dir;
+        Point3d at(double t) const {
+            return o + t * d;
         }
     };
 }

@@ -1,7 +1,7 @@
 #ifndef ONB_H
 #define ONB_H
 
-#include "vec3.h"
+#include "point3.h"
 namespace schwi {
     class onb {
     public:
@@ -29,9 +29,9 @@ namespace schwi {
 
 
     inline void onb::build_from_w(const Vector3d& n) {
-        w = unit_vector(n);
+        w = normalize(n);
         Vector3d a = (fabs(w.x) > 0.9) ? Vector3d(0, 1, 0) : Vector3d(1, 0, 0);
-        v = unit_vector(cross(w, a));
+        v = normalize(cross(w, a));
         u = cross(w, v);
     }
 }

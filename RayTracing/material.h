@@ -10,7 +10,7 @@ namespace schwi {
 	struct hit_record;
 
 	struct scatter_record {
-		ray specular_ray;
+		Ray specular_ray;
 		bool is_specular;
 		color attenuation;
 		shared_ptr<pdf> pdf_ptr;
@@ -19,19 +19,19 @@ namespace schwi {
 	class material {
 	public:
 		virtual color emitted(
-			const ray& r_in, const hit_record& rec, double u, double v, const point3& p
+			const Ray& r_in, const hit_record& rec, double u, double v, const Point3d& p
 		) const {
 			return color(0, 0, 0);
 		}
 
 		virtual bool scatter(
-			const ray& r_in, const hit_record& rec, scatter_record& srec
+			const Ray& r_in, const hit_record& rec, scatter_record& srec
 		) const {
 			return false;
 		}
 
 		virtual double scattering_pdf(
-			const ray& r_in, const hit_record& rec, const ray& scattered
+			const Ray& r_in, const hit_record& rec, const Ray& scattered
 		) const {
 			return 0;
 		}
@@ -46,7 +46,7 @@ namespace schwi {
 		lambertian(shared_ptr<texture> a) : albedo(a) {}
 
 		virtual bool scatter(
-			const ray& r_in, const hit_record& rec, scatter_record& srec
+			const Ray& r_in, const hit_record& rec, scatter_record& srec
 		) const override {
 			srec.is_specular = false;
 			srec.attenuation = albedo->value(rec.u, rec.v, rec.p);
@@ -55,9 +55,9 @@ namespace schwi {
 		}
 
 		double scattering_pdf(
-			const ray& r_in, const hit_record& rec, const ray& scattered
+			const Ray& r_in, const hit_record& rec, const Ray& scattered
 		) const {
-			auto cosine = dot(rec.normal, unit_vector(scattered.direction()));
+			auto cosine = dot(rec.normal, normalize(scattered.direction()));
 			return cosine < 0 ? 0 : cosine *InvPi;
 		}
 	};
@@ -71,10 +71,10 @@ namespace schwi {
 		metal(const color& a, double f) : albedo(a), fuzz(f < 1 ? f : 1) {}
 
 		virtual bool scatter(
-			const ray& r_in, const hit_record& rec, scatter_record& srec
+			const Ray& r_in, const hit_record& rec, scatter_record& srec
 		) const override {
-			Vector3d reflected = reflect(unit_vector(r_in.direction()), rec.normal);
-			srec.specular_ray = ray(rec.p, reflected + fuzz * random_in_unit_sphere());
+			Vector3d reflected = reflect(normalize(r_in.direction()), rec.normal);
+			srec.specular_ray = Ray(rec.p, reflected + fuzz * random_in_unit_sphere());
 			srec.attenuation = albedo;
 			srec.is_specular = true;
 			srec.pdf_ptr = 0;
@@ -90,14 +90,14 @@ namespace schwi {
 		dielectric(double index_of_refraction) : ir(index_of_refraction) {}
 
 		virtual bool scatter(
-			const ray& r_in, const hit_record& rec, scatter_record& srec
+			const Ray& r_in, const hit_record& rec, scatter_record& srec
 		) const override {
 			srec.is_specular = true;
 			srec.pdf_ptr = nullptr;
 			srec.attenuation = color(1.0, 1.0, 1.0);
 			double refraction_ratio = rec.front_face ? (1.0 / ir) : ir;
 
-			Vector3d unit_direction = unit_vector(r_in.direction());
+			Vector3d unit_direction = normalize(r_in.direction());
 
 			double cos_theta = fmin(dot(-unit_direction, rec.normal), 1.0);
 			double sin_theta = sqrt(1.0 - cos_theta * cos_theta);
@@ -110,7 +110,7 @@ namespace schwi {
 			else
 				direction = refract(unit_direction, rec.normal, refraction_ratio);
 
-			srec.specular_ray = ray(rec.p, direction, r_in.time());
+			srec.specular_ray = Ray(rec.p, direction, r_in.time());
 			return true;
 		}
 	private:
@@ -128,12 +128,12 @@ namespace schwi {
 		diffuse_light(color c) : emit(make_shared<solid_color>(c)) {}
 
 		virtual bool scatter(
-			const ray& r_in, const hit_record& rec, scatter_record& srecs
+			const Ray& r_in, const hit_record& rec, scatter_record& srecs
 		) const override {
 			return false;
 		}
 
-		virtual color emitted(const ray& r_in, const hit_record& rec, double u, double v, const point3& p) const override {
+		virtual color emitted(const Ray& r_in, const hit_record& rec, double u, double v, const Point3d& p) const override {
 			if (rec.front_face)
 				return emit->value(u, v, p);
 			else
@@ -150,10 +150,10 @@ namespace schwi {
 		isotropic(shared_ptr<texture> a) : albedo(a) {}
 
 		virtual bool scatter(
-			const ray& r_in, const hit_record& rec, scatter_record& srec
+			const Ray& r_in, const hit_record& rec, scatter_record& srec
 		) const override {
 			srec.is_specular = true;
-			srec.specular_ray = ray(rec.p, random_in_unit_sphere(), r_in.time());
+			srec.specular_ray = Ray(rec.p, random_in_unit_sphere(), r_in.time());
 			srec.attenuation = albedo->value(rec.u, rec.v, rec.p);
 			return true;
 		}

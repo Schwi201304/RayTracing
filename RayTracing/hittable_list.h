@@ -19,17 +19,17 @@ namespace schwi {
         void add(shared_ptr<hittable> object) { objects.push_back(object); }
 
         virtual bool hit(
-            const ray& r, double t_min, double t_max, hit_record& rec) const override;
+            const Ray& r, double t_min, double t_max, hit_record& rec) const override;
         virtual bool bounding_box(
             double time0, double time1, aabb& output_box) const override;
-        virtual double pdf_value(const point3& o, const Vector3d& v) const override;
-        virtual Vector3d random(const Vector3d& o) const override;
+        virtual double pdf_value(const Point3d& o, const Vector3d& v) const override;
+        virtual Vector3d random(const Point3d& o) const override;
 
     public:
         std::vector<shared_ptr<hittable>> objects;
     };
 
-    inline bool hittable_list::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
+    inline bool hittable_list::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
         hit_record temp_rec;
         bool hit_anything = false;
         auto closest_so_far = t_max;
@@ -60,7 +60,7 @@ namespace schwi {
         return true;
     }
 
-    double hittable_list::pdf_value(const point3& o, const Vector3d& v) const {
+    double hittable_list::pdf_value(const Point3d& o, const Vector3d& v) const {
         auto weight = 1.0 / objects.size();
         auto sum = 0.0;
 
@@ -70,7 +70,7 @@ namespace schwi {
         return sum;
     }
 
-    Vector3d hittable_list::random(const Vector3d& o) const {
+    Vector3d hittable_list::random(const Point3d& o) const {
         auto int_size = static_cast<int>(objects.size());
         return objects[random_int(0, int_size - 1)]->random(o);
     }

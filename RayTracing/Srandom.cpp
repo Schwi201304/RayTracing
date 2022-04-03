@@ -1,5 +1,5 @@
-#include "Srandom.h"
-#include "Smath.h"
+#include "SRandom.h"
+#include "schwi.h"
 namespace schwi {
     double random_double() {
         // Returns a random real in [0,1).
@@ -22,13 +22,13 @@ namespace schwi {
     Vector3d random_in_unit_sphere() {
         while (true) {
             auto p = random(-1, 1);
-            if (p.length_squared() >= 1) continue;
+            if (p.LengthSquared() >= 1) continue;
             return p;
         }
     }
 
     Vector3d random_unit_vector() {
-        return unit_vector(random_in_unit_sphere());
+        return normalize(random_in_unit_sphere());
     }
 
     Vector3d random_in_hemisphere(const Vector3d& normal) {
@@ -46,14 +46,14 @@ namespace schwi {
     Vector3d refract(const Vector3d& uv, const Vector3d& n, double etai_over_etat) {
         auto cos_theta = fmin(dot(-uv, n), 1.0);
         Vector3d r_out_perp = etai_over_etat * (uv + cos_theta * n);
-        Vector3d r_out_parallel = -std::sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
+        Vector3d r_out_parallel = -std::sqrt(fabs(1.0 - r_out_perp.LengthSquared())) * n;
         return r_out_perp + r_out_parallel;
     }
 
     Vector3d random_in_unit_disk() {
         while (true) {
             auto p = Vector3d(random_double(-1, 1), random_double(-1, 1), 0);
-            if (p.length_squared() >= 1) continue;
+            if (p.LengthSquared() >= 1) continue;
             return p;
         }
     }

@@ -6,8 +6,8 @@ namespace schwi {
     class camera {
     public:
         camera(
-            point3 lookfrom,
-            point3 lookat,
+            Point3d lookfrom,
+            Point3d lookat,
             Vector3d   vup,
             double vfov, // vertical field-of-view in degrees
             double aspect_ratio,
@@ -21,8 +21,8 @@ namespace schwi {
             auto viewport_height = 2.0 * h;
             auto viewport_width = aspect_ratio * viewport_height;
 
-            auto w = unit_vector(lookfrom - lookat);
-            auto u = unit_vector(cross(vup, w));
+            auto w = normalize(lookfrom - lookat);
+            auto u = normalize(cross(vup, w));
             auto v = cross(w, u);
 
             origin = lookfrom;
@@ -35,11 +35,11 @@ namespace schwi {
             time1 = _time1;
         }
 
-        ray get_ray(double s, double t) const {
+        Ray get_ray(double s, double t) const {
             Vector3d rd = lens_radius * random_in_unit_disk();
             Vector3d offset = u * rd.x + v * rd.y;
 
-            return ray(
+            return Ray(
                 origin + offset,
                 lower_left_corner + s * horizontal + t * vertical - origin - offset,
                 random_double(time0, time1)
@@ -47,8 +47,8 @@ namespace schwi {
         }
 
     private:
-        point3 origin;
-        point3 lower_left_corner;
+        Point3d origin;
+        Point3d lower_left_corner;
         Vector3d horizontal;
         Vector3d vertical;
         Vector3d u, v, w;

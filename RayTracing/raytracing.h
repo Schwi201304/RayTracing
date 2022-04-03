@@ -8,7 +8,7 @@
 #include <cstdlib>
 // Common Headers
 
-#include "Smath.h"
+#include "schwi.h"
 #include "ray.h"
 #include "Srandom.h"
 
@@ -18,9 +18,6 @@ namespace schwi {
 	using std::make_shared;
 	using std::sqrt;
 	using BYTE = unsigned char;
-	// Constants
-
-	const double infinity = std::numeric_limits<double>::infinity();
 
 	// Utility Functions
 

@@ -1,11 +1,11 @@
 #include "sphere.h"
 #include "pdf.h"
 namespace schwi {
-	bool sphere::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
+	bool sphere::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
 		Vector3d oc = r.origin() - center;
-		auto a = r.direction().length_squared();
+		auto a = r.direction().LengthSquared();
 		auto half_b = dot(oc, r.direction());
-		auto c = oc.length_squared() - radius * radius;
+		auto c = oc.LengthSquared() - radius * radius;
 
 		auto discriminant = half_b * half_b - a * c;
 		if (discriminant < 0) return false;
@@ -36,20 +36,20 @@ namespace schwi {
 		return true;
 	}
 
-	double sphere::pdf_value(const point3& o, const Vector3d& v) const {
+	double sphere::pdf_value(const Point3d& o, const Vector3d& v) const {
 		hit_record rec;
-		if (!this->hit(ray(o, v), 0.001, infinity, rec))
+		if (!this->hit(Ray(o, v), 0.001, Infinity, rec))
 			return 0;
 
-		auto cos_theta_max = sqrt(1 - radius * radius / (center - o).length_squared());
+		auto cos_theta_max = sqrt(1 - radius * radius / (center - o).LengthSquared());
 		auto solid_angle = 2 * Pi * (1 - cos_theta_max);
 
 		return  1 / solid_angle;
 	}
 
-	Vector3d sphere::random(const point3& o) const {
+	Vector3d sphere::random(const Point3d& o) const {
 		Vector3d direction = center - o;
-		auto distance_squared = direction.length_squared();
+		auto distance_squared = direction.LengthSquared();
 		onb uvw;
 		uvw.build_from_w(direction);
 		return uvw.local(random_to_sphere(radius, distance_squared));

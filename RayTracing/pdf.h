@@ -1,6 +1,6 @@
 #ifndef PDF_H
 #define PDF_H
-#include "vec3.h"
+#include "point3.h"
 #include "onb.h"
 
 namespace schwi {
@@ -17,7 +17,7 @@ namespace schwi {
         cosine_pdf(const Vector3d& w) { uvw.build_from_w(w); }
 
         virtual double value(const Vector3d& direction) const override {
-            auto cosine = dot(unit_vector(direction), uvw.w);
+            auto cosine = dot(normalize(direction), uvw.w);
             return (cosine <= 0) ? 0 : cosine*InvPi;
         }
 
@@ -31,7 +31,7 @@ namespace schwi {
 
     class hittable_pdf : public pdf {
     public:
-        hittable_pdf(shared_ptr<hittable> p, const point3& origin) : ptr(p), o(origin) {}
+        hittable_pdf(shared_ptr<hittable> p, const Point3d& origin) : ptr(p), o(origin) {}
 
         virtual double value(const Vector3d& direction) const override {
             return ptr->pdf_value(o, direction);
@@ -42,7 +42,7 @@ namespace schwi {
         }
 
     public:
-        point3 o;
+        Point3d o;
         shared_ptr<hittable> ptr;
     };
 

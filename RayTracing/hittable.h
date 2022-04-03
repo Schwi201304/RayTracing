@@ -7,7 +7,7 @@
 namespace schwi {
     class material;
     struct hit_record {
-        point3 p;
+        Point3d p;
         Vector3d normal;
         shared_ptr<material> mat_ptr;
         double t;
@@ -15,7 +15,7 @@ namespace schwi {
         double v;
         bool front_face;
 
-        inline void set_face_normal(const ray& r, const Vector3d& outward_normal) {
+        inline void set_face_normal(const Ray& r, const Vector3d& outward_normal) {
             front_face = dot(r.direction(), outward_normal) < 0;
             normal = front_face ? outward_normal : -outward_normal;
         }
@@ -23,12 +23,12 @@ namespace schwi {
 
     class hittable {
     public:
-        virtual bool hit(const ray& r, double t_min, double t_max, hit_record& rec) const = 0;
+        virtual bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const = 0;
         virtual bool bounding_box(double time0, double time1, aabb& output_box) const = 0;
-        virtual double pdf_value(const point3& o, const Vector3d& v) const {
+        virtual double pdf_value(const Point3d& o, const Vector3d& v) const {
             return 0.0;
         }
-        virtual Vector3d random(const Vector3d& o) const {
+        virtual Vector3d random(const Point3d& o) const {
             return Vector3d(1, 0, 0);
         }
     };
@@ -39,7 +39,7 @@ namespace schwi {
             : ptr(p), offset(displacement) {}
 
         virtual bool hit(
-            const ray& r, double t_min, double t_max, hit_record& rec) const override;
+            const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 
         virtual bool bounding_box(double time0, double time1, aabb& output_box) const override;
 
@@ -48,8 +48,8 @@ namespace schwi {
         Vector3d offset;
     };
 
-    inline bool translate::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
-        ray moved_r(r.origin() - offset, r.direction(), r.time());
+    inline bool translate::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
+        Ray moved_r(r.origin() - offset, r.direction(), r.time());
         if (!ptr->hit(moved_r, t_min, t_max, rec))
             return false;
 
@@ -75,7 +75,7 @@ namespace schwi {
         rotate_y(shared_ptr<hittable> p, double angle);
 
         virtual bool hit(
-            const ray& r, double t_min, double t_max, hit_record& rec) const override;
+            const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 
         virtual bool bounding_box(double time0, double time1, aabb& output_box) const override {
             output_box = bbox;
@@ -96,8 +96,8 @@ namespace schwi {
         cos_theta = cos(radians);
         hasbox = ptr->bounding_box(0, 1, bbox);
 
-        point3 min(infinity, infinity, infinity);
-        point3 max(-infinity, -infinity, -infinity);
+        Point3d min(Infinity, Infinity, Infinity);
+        Point3d max(-Infinity, -Infinity, -Infinity);
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -122,7 +122,7 @@ namespace schwi {
         bbox = aabb(min, max);
     }
 
-    inline bool rotate_y::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
+    inline bool rotate_y::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
         auto origin = r.origin();
         auto direction = r.direction();
 
@@ -132,7 +132,7 @@ namespace schwi {
         direction[0] = cos_theta * r.direction()[0] - sin_theta * r.direction()[2];
         direction[2] = sin_theta * r.direction()[0] + cos_theta * r.direction()[2];
 
-        ray rotated_r(origin, direction, r.time());
+        Ray rotated_r(origin, direction, r.time());
 
         if (!ptr->hit(rotated_r, t_min, t_max, rec))
             return false;
@@ -157,7 +157,7 @@ namespace schwi {
         flip_face(shared_ptr<hittable> p) : ptr(p) {}
 
         virtual bool hit(
-            const ray& r, double t_min, double t_max, hit_record& rec) const override {
+            const Ray& r, double t_min, double t_max, hit_record& rec) const override {
 
             if (!ptr->hit(r, t_min, t_max, rec))
                 return false;

@@ -9,7 +9,7 @@ namespace schwi {
         perlin() {
             ranvec = new Vector3d[point_count];
             for (int i = 0; i < point_count; ++i) {
-                ranvec[i] = unit_vector(random(-1, 1));
+                ranvec[i] = normalize(random(-1, 1));
             }
 
             perm_x = perlin_generate_perm();
@@ -24,7 +24,7 @@ namespace schwi {
             delete[] perm_z;
         }
 
-        double noise(const point3& p) const {
+        double noise(const Point3d& p) const {
             auto u = p.x - floor(p.x);
             auto v = p.y - floor(p.y);
             auto w = p.z - floor(p.z);
@@ -50,7 +50,7 @@ namespace schwi {
             return perlin_interp(c, u, v, w);
         }
 
-        double turb(const point3& p, int depth = 7) const {
+        double turb(const Point3d& p, int depth = 7) const {
             auto accum = 0.0;
             auto temp_p = p;
             auto weight = 1.0;
@@ -58,7 +58,7 @@ namespace schwi {
             for (int i = 0; i < depth; i++) {
                 accum += weight * noise(temp_p);
                 weight *= 0.5;
-                temp_p *= 2;
+                temp_p = temp_p*2.0;
             }
 
             return fabs(accum);

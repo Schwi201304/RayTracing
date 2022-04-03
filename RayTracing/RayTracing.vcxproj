@@ -153,28 +153,41 @@
     <ClCompile Include="perlin.h" />
     <ClCompile Include="raytracing.h" />
     <ClCompile Include="sphere.cpp" />
-    <ClCompile Include="Srandom.cpp" />
+    <ClCompile Include="SRandom.cpp" />
+    <ClCompile Include="vec.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aabb.h" />
     <ClInclude Include="aarect.h" />
+    <ClInclude Include="bound.h" />
     <ClInclude Include="box.h" />
     <ClInclude Include="bvh.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="constant_medium.h" />
     <ClInclude Include="hittable_list.h" />
     <ClInclude Include="image.h" />
+    <ClInclude Include="interaction.h" />
     <ClInclude Include="material.h" />
-    <ClInclude Include="Smath.h" />
+    <ClInclude Include="matrix.h" />
+    <ClInclude Include="medium.h" />
+    <ClInclude Include="normal3.h" />
+    <ClInclude Include="point2.h" />
+    <ClInclude Include="point3.h" />
+    <ClInclude Include="quaternion.h" />
+    <ClInclude Include="RayDifferential.h" />
+    <ClInclude Include="shape.h" />
+    <ClInclude Include="schwi.h" />
     <ClInclude Include="moving_sphere.h" />
     <ClInclude Include="onb.h" />
     <ClInclude Include="pdf.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sphere.h" />
-    <ClInclude Include="Srandom.h" />
+    <ClInclude Include="SRandom.h" />
     <ClInclude Include="texture.h" />
-    <ClInclude Include="vec3.h" />
+    <ClInclude Include="transform.h" />
+    <ClInclude Include="vector2.h" />
+    <ClInclude Include="vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="out.png" />
