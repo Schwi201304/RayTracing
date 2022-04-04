@@ -39,16 +39,17 @@ namespace schwi {
 	class SurfaceInteraction;
 
 	//Global Constants
-	constexpr double Pi = 3.14159265358979323846;
-	constexpr double InvPi = 0.31830988618379067154;
-	constexpr double Inv2Pi = 0.15915494309189533577;
-	constexpr double Inv4Pi = 0.07957747154594766788;
-	constexpr double PiOver2 = 1.57079632679489661923;
-	constexpr double PiOver4 = 0.78539816339744830961;
-	constexpr double Sqrt2 = 1.41421356237309504880;
-	constexpr double Log2 = 1.44269504088896322870;
+	static constexpr double Pi = 3.14159265358979323846;
+	static constexpr double InvPi = 0.31830988618379067154;
+	static constexpr double Inv2Pi = 0.15915494309189533577;
+	static constexpr double Inv4Pi = 0.07957747154594766788;
+	static constexpr double PiOver2 = 1.57079632679489661923;
+	static constexpr double PiOver4 = 0.78539816339744830961;
+	static constexpr double Sqrt2 = 1.41421356237309504880;
+	static constexpr double Log2 = 1.44269504088896322870;
 
-	constexpr double Infinity = std::numeric_limits<double>::max();
+	static constexpr double Infinity = std::numeric_limits<double>::max();
+	static constexpr double MachineEpsilon = std::numeric_limits<double>::epsilon() * 0.5;
 
 	inline double Radians(double deg) {
 		return (Pi / 180) * deg;
@@ -56,6 +57,10 @@ namespace schwi {
 
 	inline double Degrees(double rad) {
 		return (180 * InvPi) * rad;
+	}
+
+	inline constexpr double gamma(int n) {
+		return (n * MachineEpsilon) / (1 - n * MachineEpsilon);
 	}
 }
 #endif

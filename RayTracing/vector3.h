@@ -150,7 +150,7 @@ namespace schwi {
 
 	template<typename T>
 	inline Vector3<T> abs(const Vector3<T>& v) {
-		return Vector<T>(std::abs(v.x), std::abs(v.y), std::abs(v.z));
+		return Vector3<T>(std::abs(v.x), std::abs(v.y), std::abs(v.z));
 	}
 
 	using Vector3i = Vector3<int>;

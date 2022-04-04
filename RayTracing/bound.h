@@ -98,6 +98,53 @@ namespace schwi {
 			*center = (pMin + pMax) / 2;
 			*radius = Inside(*center, *this) ? Distance(*center, pMax) : 0;
 		}
+
+		template <typename T>
+		inline bool IntersectP(const Ray& ray, double* hitt0, double* hitt1) const {
+			double t0 = 0, t1 = ray.tMax;
+			for (int i = 0; i < 3; ++i) {
+				double invRayDir = 1 / ray.d[i];
+				double tNear = (pMin[i] - ray.o[i]) * invRayDir;
+				double tFar = (pMax[i] - ray.o[i]) * invRayDir;
+				if (tNear > tFar) std::swap(tNear, tFar);
+				tFar *= 1 + 2 * gamma(3);
+				t0 = tNear > t0 ? tNear : t0;
+				t1 = tFar < t1 ? tFar : t1;
+				if (t0 > t1) return false;
+			}
+			if (hitt0) *hitt0 = t0;
+			if (hitt1) *hitt1 = t1;
+			return true;
+		}
+
+		template <typename T>
+		inline bool IntersectP(const Ray& ray, const Vector3f& invDir, const int dirIsNeg[3]) const {
+			const Bounds3d& bounds = *this;
+			double tMin = (bounds[dirIsNeg[0]].x - ray.o.x) * invDir.x;
+			double tMax = (bounds[1 - dirIsNeg[0]].x - ray.o.x) * invDir.x;
+			double tyMin = (bounds[dirIsNeg[1]].y - ray.o.y) * invDir.y;
+			double tyMax = (bounds[1 - dirIsNeg[1]].y - ray.o.y) * invDir.y;
+			tMax *= 1 + 2 * gamma(3);
+			tyMax *= 1 + 2 * gamma(3);
+
+			if (tMin > tyMax || tyMin > tMax)
+				return false;
+			if (tyMin > tMin) tMin = tyMin;
+			if (tyMax < tMax) tMax = tyMax;
+
+			double tzMin = (bounds[dirIsNeg[2]].z - ray.o.z) * invDir.z;
+			double tzMax = (bounds[1 - dirIsNeg[2]].z - ray.o.z) * invDir.z;
+			tzMax *= 1 + 2 * gamma(3);
+
+			if (tMin > tzMax || tzMin > tMax)
+				return false;
+			if (tzMin > tMin)
+				tMin = tzMin;
+			if (tzMax < tMax)
+				tMax = tzMax;
+
+			return (tMin < ray.tMax) && (tMax > 0);
+		}
 	};
 
 	template <typename T>
