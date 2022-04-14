@@ -1,5 +1,4 @@
-#ifndef SCENE_H
-#define SCENE_H
+#pragma once
 
 #include "raytracing.h"
 #include "image.h"
@@ -12,6 +11,7 @@
 #include "bvh.h"
 #include "box.h"
 #include "constant_medium.h"
+#include "cylinder.h"
 
 namespace schwi {
 	hittable_list random_scene() {
@@ -123,14 +123,18 @@ namespace schwi {
 		objects.add(make_shared<xy_rect>(0, 555, 0, 555, 555, white));
 
 		shared_ptr<material> aluminum = make_shared<metal>(color(0.8, 0.85, 0.88), 0.0);
+
 		shared_ptr<hittable> box1 = make_shared<box>(Point3d(0, 0, 0), Point3d(165, 330, 165), white);
 		box1 = make_shared<rotate_y>(box1, 15);
 		box1 = make_shared<translate>(box1, Vector3d(265, 0, 295));
 		objects.add(box1);
 
+		//shared_ptr<hittable> cy = make_shared<Cylinder>(Point3d(130, 150, 130), 50, 100, white);
+		//objects.add(cy);
+
 		//shared_ptr<hittable> box2 = make_shared<box>(Point3d(0, 0, 0), Point3d(165, 165, 165), white);
 		//box2 = make_shared<rotate_y>(box2, -18);
-		//box2 = make_shared<translate>(box2, Vector3(130, 0, 65));
+		//box2 = make_shared<translate>(box2, Vector3d(130, 0, 65));
 		//objects.add(box2);
 
 		auto glass = make_shared<dielectric>(1.5);
@@ -232,5 +236,3 @@ namespace schwi {
 		return objects;
 	}
 }
-
-#endif

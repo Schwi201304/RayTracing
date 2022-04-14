@@ -1,5 +1,4 @@
-#ifndef PDF_H
-#define PDF_H
+#pragma once
 #include "point3.h"
 #include "onb.h"
 
@@ -80,4 +79,3 @@ namespace schwi {
         return Vector3d(x, y, z);
     }
 }
-#endif

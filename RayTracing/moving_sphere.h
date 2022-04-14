@@ -1,5 +1,4 @@
-#ifndef MOVING_SPHERE_H
-#define MOVING_SPHERE_H
+#pragma once
 
 #include "raytracing.h"
 
@@ -70,4 +69,3 @@ namespace schwi {
         return true;
     }
 }
-#endif

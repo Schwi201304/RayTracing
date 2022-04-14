@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="image.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>main</Filter>
     </ClCompile>
@@ -39,17 +36,14 @@
     <ClCompile Include="hittable.h">
       <Filter>shape</Filter>
     </ClCompile>
-    <ClCompile Include="sphere.cpp">
-      <Filter>shape</Filter>
-    </ClCompile>
-    <ClCompile Include="SRandom.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
     <ClCompile Include="raytracing.h">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="vec.h">
       <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +69,6 @@
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="pdf.h">
       <Filter>core</Filter>
     </ClInclude>
     <ClInclude Include="moving_sphere.h">
@@ -145,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="quaternion.h">
       <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="cylinder.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="pdf.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

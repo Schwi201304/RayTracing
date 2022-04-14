@@ -1,6 +1,4 @@
-#ifndef SCHWI_RAY_H
-#define SCHWI_RAY_H
-
+#pragma once
 #include "point3.h"
 #include "schwi.h"
 #include "medium.h"
@@ -28,4 +26,3 @@ namespace schwi {
         }
     };
 }
-#endif

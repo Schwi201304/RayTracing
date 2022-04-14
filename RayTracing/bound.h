@@ -1,5 +1,4 @@
-#ifndef SCHWI_BOUND_H
-#define SCHWI_BOUND_H
+#pragma once
 
 #include "point3.h"
 
@@ -7,6 +6,8 @@ namespace schwi {
 	template<typename T>
 	class Bounds2 {};
 
+
+	using Bounds3d = Bounds3<double>;
 	template<typename T>
 	class Bounds3 {
 	public:
@@ -204,8 +205,4 @@ namespace schwi {
 		return Bounds3<T>(b.pMin - Vector3<T>(delta, delta, delta),
 			b.pMax + Vector3<T>(delta, delta, delta));
 	}
-
-	using Bounds3d = Bounds3<double>;
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef SCHWI_SHAPE_H
-#define SCHWI_SHAPE_H
+#pragma once
 
 #include "transform.h"
 namespace schwi {
@@ -25,5 +24,3 @@ namespace schwi {
 		}
 	};
 }
-
-#endif

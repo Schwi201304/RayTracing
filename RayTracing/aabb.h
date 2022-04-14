@@ -1,5 +1,4 @@
-#ifndef AABB_H
-#define AABB_H
+#pragma once
 
 #include "raytracing.h"
 namespace schwi {
@@ -44,4 +43,3 @@ namespace schwi {
 		return aabb(small, big);
 	}
 }
-#endif

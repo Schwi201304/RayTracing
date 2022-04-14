@@ -1,6 +1,4 @@
-#ifndef ONB_H
-#define ONB_H
-
+#pragma once
 #include "point3.h"
 namespace schwi {
     class onb {
@@ -35,4 +33,3 @@ namespace schwi {
         u = cross(w, v);
     }
 }
-#endif

@@ -1,5 +1,4 @@
-#ifndef MATERIAL_H
-#define MATERIAL_H
+#pragma once
 
 #include "raytracing.h"
 #include "hittable.h"
@@ -162,4 +161,3 @@ namespace schwi {
 		shared_ptr<texture> albedo;
 	};
 }
-#endif

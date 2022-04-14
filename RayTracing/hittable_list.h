@@ -1,5 +1,4 @@
-#ifndef HITTABLE_LIST_H
-#define HITTABLE_LIST_H
+#pragma once
 
 #include "hittable.h"
 
@@ -75,4 +74,3 @@ namespace schwi {
         return objects[random_int(0, int_size - 1)]->random(o);
     }
 }
-#endif

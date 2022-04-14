@@ -1,5 +1,4 @@
-#ifndef PERLIN_H
-#define PERLIN_H
+#pragma once
 
 #include "raytracing.h"
 
@@ -123,4 +122,3 @@ namespace schwi {
 
     };
 }
-#endif

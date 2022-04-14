@@ -1,5 +1,4 @@
-#ifndef CONSTANT_MEDIUM_H
-#define CONSTANT_MEDIUM_H
+#pragma once
 
 #include "raytracing.h"
 
@@ -81,4 +80,3 @@ namespace schwi {
         return true;
     }
 }
-#endif

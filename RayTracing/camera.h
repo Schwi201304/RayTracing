@@ -1,6 +1,4 @@
-#ifndef CAMERA_H
-#define CAMERA_H
-
+#pragma once
 #include "raytracing.h"
 namespace schwi {
     class camera {
@@ -56,4 +54,3 @@ namespace schwi {
         double time0, time1;  // shutter open/close times
     };
 }
-#endif

@@ -1,5 +1,4 @@
-#ifndef AARECT_H
-#define AARECT_H
+#pragma once
 
 #include "raytracing.h"
 
@@ -142,4 +141,3 @@ namespace schwi {
         return true;
     }
 }
-#endif

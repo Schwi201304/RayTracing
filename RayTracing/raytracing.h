@@ -1,6 +1,4 @@
-#ifndef RAYTRACING_H
-#define RAYTRACING_H
-
+#pragma once
 #include <cmath>
 #include <limits>
 #include <memory>
@@ -57,4 +55,3 @@ namespace schwi {
 		return static_cast<int>(random_double(min, max + 1));
 	}
 }
-#endif

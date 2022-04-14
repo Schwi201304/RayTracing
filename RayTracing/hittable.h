@@ -1,5 +1,4 @@
-#ifndef HITTABLE_H
-#define HITTABLE_H
+#pragma once
 
 #include "ray.h"
 #include "raytracing.h"
@@ -174,4 +173,3 @@ namespace schwi {
         shared_ptr<hittable> ptr;
     };
 }
-#endif

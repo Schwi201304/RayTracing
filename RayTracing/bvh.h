@@ -1,6 +1,4 @@
-#ifndef BVH_H
-#define BVH_H
-
+#pragma once
 #include "raytracing.h"
 
 #include "hittable.h"
@@ -114,4 +112,3 @@ namespace schwi {
 		box = surrounding_box(box_left, box_right);
 	}
 }
-#endif

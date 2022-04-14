@@ -1,5 +1,4 @@
-#ifndef SCHWI_INTERACTION_H
-#define SCHWI_INTERACTION_H
+#pragma once
 
 #include "point2.h"
 #include "point3.h"
@@ -73,5 +72,3 @@ namespace schwi {
 		}
 	};
 }
-
-#endif

@@ -12,14 +12,6 @@
 #include <string>
 #include <vector>
 
-//Warning Disable
-#pragma warning(disable : 4305)
-#pragma warning(disable : 4244)
-#pragma warning(disable : 4843)
-#pragma warning(disable : 4267)
-#pragma warning(disable : 4838)
-#pragma warning(disable : 4996)
-
 namespace schwi {
 	// Global Forward Declarations
 	template <typename T> class vec2;

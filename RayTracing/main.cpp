@@ -58,7 +58,7 @@ int main() {
 	auto vfov = 40.0;
 	auto aperture = 0.0;
 
-	switch (1) {
+	switch (6) {
 	case 1:
 		world = random_scene();
 		background = color(0.70, 0.80, 1.00);
@@ -98,8 +98,8 @@ int main() {
 	case 6:
 		world = cornell_box();
 		aspect_ratio = 1.0;
-		image_width = 600;
-		samples_per_pixel = 100;
+		image_width = 400;
+		samples_per_pixel = 50;
 		background = color(0, 0, 0);
 		lookfrom = Point3d(278, 278, -800);
 		lookat = Point3d(278, 278, 0);
@@ -142,6 +142,7 @@ int main() {
 	Image img(image_width, image_height);
 	std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
+#pragma omp parallel for schedule(dynamic, 1) private(r)
 	for (int j = image_height - 1; j >= 0; --j) {
 		std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
 		for (int i = 0; i < image_width; ++i) {

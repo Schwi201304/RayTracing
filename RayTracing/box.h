@@ -1,5 +1,4 @@
-#ifndef BOX_H
-#define BOX_H
+#pragma once
 
 #include "raytracing.h"
 
@@ -43,4 +42,3 @@ namespace schwi {
         return sides.hit(r, t_min, t_max, rec);
     }
 }
-#endif

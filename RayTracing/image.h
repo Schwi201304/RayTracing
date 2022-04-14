@@ -1,10 +1,11 @@
-#ifndef SCHWI_IMAGE_H
-#define SCHWI_IMAGE_H
+#pragma once
 
 #include<fstream>
 #include<iostream>
 #include<string>
 #include<vector>
+
+#pragma warning(disable : 26451)
 
 namespace schwi {
 	using BYTE = unsigned char;
@@ -55,4 +56,3 @@ namespace schwi {
 		Color getColor(const double u, const double v)const;
 	};
 }
-#endif

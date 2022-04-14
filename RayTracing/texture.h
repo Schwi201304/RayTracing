@@ -1,5 +1,4 @@
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#pragma once
 
 #include "raytracing.h"
 #include "perlin.h"
@@ -89,4 +88,3 @@ namespace schwi {
         }
     };
 }
-#endif
