@@ -46,7 +46,7 @@ int main() {
 	auto aspect_ratio = 16.0 / 9.0;
 	int image_width = 400;
 	int samples_per_pixel = 100;
-	int max_depth = 50;
+	int max_depth = 10;
 	color background(0, 0, 0);
 
 	// World
